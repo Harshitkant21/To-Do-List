@@ -31,14 +31,14 @@ const ToDoWrapper = () => {
   const editTodo = (id) => {
     setTodos(
       todos.map((todo) =>
-        todos.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
+        todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
       )
     );
   };
   const editTask = (task, id) => {
     setTodos(
       todos.map((todo) =>
-        todos.id === id ? { ...todo, task, isEditing: !todo.isEditing } : todo
+        todo.id === id ? { ...todo, task, isEditing: !todo.isEditing } : todo
       )
     );
   };
@@ -47,16 +47,16 @@ const ToDoWrapper = () => {
     <div className="TodoWrapper">
       <h1>Get Things Done!!</h1>
       <ToDoForm addTodo={addTodo} />
-      {todos.map((todo, index) =>
+      {todos.map((todo) =>
         todo.isEditing ? (
-          <EditToDo EditTodo={editTask} task={todo}/>
+          <EditToDo editTodo={editTask} task={todo} key={todo.id} />
         ) : (
           <ToDo
             task={todo}
             key={todo.id}
             toggleComplete={toggleComplete}
             deleteTodo={deleteTodo}
-            EditToDo={editTodo}
+            editTodo={editTodo}
           />
         )
       )}
